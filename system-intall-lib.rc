@@ -2,7 +2,7 @@
 
 CDIR=$(dirname "$BASH_SOURCE")
 
-. "${CDIR}/lib/bsfl/lib/bsfl.bash" || exit 1
+. "${CDIR}/lib/lib.rc" || exit 1
 
 function error() {
     >&2 msg_error "$1"
@@ -11,13 +11,6 @@ function error() {
 function abort() {
     >&2 error 'Process aborted !'
     exit 1
-}
-
-[ -z "$PROJECT_ROOT_DIR" ] && {
-    >&2 error 'The environment variable PROJECT_ROOT_DIR is not defined.'
-    >&2 error 'This is the absolute directory where lives the system-tree project,'
-
-    abort
 }
 
 [ -z "$SYSTEM_TREE_PATH" ] && {
@@ -108,14 +101,15 @@ function symlinck() {
 
 # Symlinck recursively all files and only the files
 # from $SYSTEM_TREE_PATH keeping the directories hierarchies
-function recursive_symlinck_files_from_system_tree() {
+function symlinck-recursive() {
     local MSG="Recursively symlincking all files from ${SYSTEM_TREE_PATH}"
-    info $MSG
+    local IFS
+    info "$MSG"
     files=$(find -L "$SYSTEM_TREE_PATH" -type f -print)
 
-    local IFS=$(echo -en "\n\b")
+    IFS=$(echo -en "\n\b")
     for file in $files; do
-        ABS_PATH=$(echo $file | sed -e "s#^${SYSTEM_TREE_PATH}##1")
+        ABS_PATH="$(echo $file | sed -e "s#^${SYSTEM_TREE_PATH}##1")"
         symlinck "$ABS_PATH"
     done
 }

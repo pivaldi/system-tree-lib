@@ -20,7 +20,7 @@
 ## @brief OLConfig version number.
 declare -r OLCONFIG_VERSION="0.1.0"
 
-. $(dirname "${BASH_SOURCE[0]}")/ol-bash/lib/bsfl.bash || exit 1
+. $(dirname "${BASH_SOURCE[0]}")/bsfl/lib/bsfl.bash || exit 1
 
 declare __DOING_MSG=
 

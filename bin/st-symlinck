@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+ST_DIR=$(cd -- "${SCRIPT_DIR}/.." &> /dev/null && pwd)
+
+source "$ST_DIR/system-intall-lib.rc" || exit 1
