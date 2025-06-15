@@ -1,0 +1,3 @@
+[submodule "lib/bsfl"]
+	path = lib/bsfl
+	url = https://github.com/OVYA/bsfl.git
